@@ -25,7 +25,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: linear-gradient(160deg, #FFF0F8 0%, #F3EEFF 30%, #EEF8FF 60%, #F5FFF9 85%, #FFFBEE 100%);
+  background: #ffffff;
   background-attachment: fixed;
   color: var(--text-dark);
   font-family: 'DM Sans', system-ui, sans-serif;
