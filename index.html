@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Melina Fathidashtaki — Portfolio</title>
+  <title>Melina Fathidashtaki</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- Full-page ocean wave canvas -->
   <canvas id="dragonCanvas"></canvas>
 
-  <!-- Floating nav -->
+  <!-- ── NAV ── -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <span class="nav-logo">🏄‍♀️ MF</span>
+      <span class="nav-logo">MF</span>
       <div class="nav-links">
-        <a href="#interview">Story</a>
+        <a href="#credentials">About</a>
         <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
+        <a href="#projects">Work</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -28,125 +27,106 @@
   <!-- ── HERO ── -->
   <section class="hero" id="home">
     <div class="hero-inner">
-      <div class="chapter-marker">
-        <span class="chapter-line"></span>
-        <span class="chapter-text">SURF'S UP · DOCUMENTARY SERIES</span>
-        <span class="chapter-line"></span>
-      </div>
-
-      <div class="seagulls" aria-hidden="true">
-        <span class="gull g1">🕊</span>
-        <span class="gull g2">🕊</span>
-        <span class="gull g3">🕊</span>
-      </div>
-
-      <p class="hero-location">WESTERN UNIVERSITY · LONDON, ON</p>
-      <h1 class="hero-name">MELINA</h1>
-      <p class="hero-surname">FATHIDASHTAKI</p>
+      <p class="hero-eyebrow">CS Student &nbsp;·&nbsp; Entrepreneur &nbsp;·&nbsp; Western University</p>
+      <h1 class="hero-name">Melina</h1>
+      <p class="hero-surname">Fathidashtaki</p>
       <p class="hero-tagline">
         <span id="heroType"></span><span class="cursor-blink">|</span>
       </p>
-
-      <div class="hero-cta">
-        <a href="#interview" class="btn btn-wave">Watch the Story 🎬</a>
-        <a href="https://github.com/Meellinaa" target="_blank" class="btn btn-glass">GitHub 🐙</a>
-      </div>
-
-      <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="rgba(255,245,220,0.15)"/>
-          <path d="M0,55 C480,10 960,70 1440,30 L1440,80 L0,80 Z" fill="rgba(255,245,220,0.08)"/>
-        </svg>
+      <div class="hero-actions">
+        <a href="#credentials" class="btn btn-dark">See My Work</a>
+        <a href="https://github.com/Meellinaa" target="_blank" class="btn btn-outline">GitHub</a>
       </div>
     </div>
-
-    <div class="scroll-hint">
+    <div class="scroll-cue">
       <span>scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ── DOCUMENTARY INTERVIEW ── -->
-  <section class="documentary" id="interview">
-    <div class="film-overlay"></div>
-    <div class="doc-inner">
+  <!-- ── STAT BAR ── -->
+  <section class="stat-bar">
+    <div class="stat-item">
+      <span class="stat-num">4<sup>th</sup></span>
+      <span class="stat-label">TD Scholar<br>University-Wide</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">18<span class="stat-of">/5,000</span></span>
+      <span class="stat-label">Gifted Academic<br>Program</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">30<sup>%</sup></span>
+      <span class="stat-label">Monthly Revenue<br>Growth</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">500<sup>+</sup></span>
+      <span class="stat-label">Community<br>Members Built</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">250<sup>+</sup></span>
+      <span class="stat-label">Events<br>Organized</span>
+    </div>
+  </section>
 
-      <div class="clapperboard-header">
-        <div class="clap-icon">🎬</div>
-        <div class="clap-info">
-          <span>SCENE 01 / TAKE 01</span>
-          <span>SUBJECT INTERVIEW</span>
-        </div>
-        <div class="rec-dot"><span></span> REC</div>
+  <!-- ── CREDENTIALS / ABOUT ── -->
+  <section class="credentials-section" id="credentials">
+    <div class="container">
+      <p class="section-eyebrow">Who I Am</p>
+      <h2 class="section-heading">Builder. Scholar.<br><em>Problem Solver.</em></h2>
+      <div class="about-body">
+        <p>I'm a Computer Science student at Western University who builds things that matter — from AI pipelines that analyze skin tones to data systems that drive real revenue. I don't just study technology; I apply it to create measurable impact.</p>
+        <p>Selected as a TD Scholar (one of four university-wide), admitted to the Gifted Academic Program (18 of 5,000), and co-founded a company in my first year that grew 30% month-over-month. I organize communities, write clean code, and believe the best engineers also understand business.</p>
       </div>
-
-      <div class="subject-nameplate">
-        <div class="nameplate-name">MELINA FATHIDASHTAKI</div>
-        <div class="nameplate-title">CS Student · Entrepreneur · Builder · Western University</div>
-      </div>
-
-      <div class="facts-wrap">
-        <div class="mic-icon">🎙️</div>
-        <div class="fact-display">
-          <p class="fact-text" id="factText">...</p>
-          <div class="fact-counter">
-            <span id="factIndex">1</span> / <span id="factTotal">7</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="fact-dots" id="factDots"></div>
-
     </div>
   </section>
 
   <!-- ── EXPERIENCE ── -->
   <section class="experience-section" id="experience">
     <div class="container">
-      <div class="section-eyebrow">Chapter 02</div>
-      <h2 class="section-heading">The Training <em>Montage</em></h2>
-      <p class="section-sub">Every great surfer has a story. Here's mine.</p>
+      <p class="section-eyebrow">Experience</p>
+      <h2 class="section-heading">Where I've <em>Been</em></h2>
 
       <div class="timeline">
 
-        <div class="timeline-item" data-wave="🌊">
-          <div class="timeline-badge" style="background:linear-gradient(135deg,#FF8E53,#FFD93D)">🎤</div>
-          <div class="timeline-card">
-            <div class="tl-meta">Oct 2025 – Present</div>
-            <div class="tl-title">Student Ambassador & Event Organizer</div>
-            <div class="tl-org">Morrissette Entrepreneurship · Western University</div>
+        <div class="tl-item reveal">
+          <div class="tl-year">2025 — Now</div>
+          <div class="tl-content">
+            <p class="tl-role">Student Ambassador &amp; Event Organizer</p>
+            <p class="tl-company">Morrissette Institute for Entrepreneurship · Western University</p>
             <ul class="tl-points">
-              <li>Organized <strong>250+ events</strong> attracting 500+ student founders & industry leaders</li>
-              <li>Grew community participation across <strong>80+ consecutive events</strong>, driving program enrollment by <strong>300%</strong></li>
-              <li>Managed end-to-end operations: speaker recruitment, logistics, promotion & follow-up</li>
+              <li>Organized <strong>250+ events</strong> attracting 500+ student founders &amp; industry leaders</li>
+              <li>Grew community participation across <strong>80+ consecutive events</strong>, driving enrollment by <strong>300%</strong></li>
+              <li>Managed end-to-end operations: speaker recruitment, logistics, promotion &amp; follow-up</li>
             </ul>
           </div>
         </div>
 
-        <div class="timeline-item" data-wave="🏄">
-          <div class="timeline-badge" style="background:linear-gradient(135deg,#FFD93D,#FF6B6B)">⭐</div>
-          <div class="timeline-card">
-            <div class="tl-meta">Sep 2025 – Present</div>
-            <div class="tl-title">Co-Founder · Business Operations & Finance</div>
-            <div class="tl-org">Gold Star Catering · Toronto, ON</div>
+        <div class="tl-item reveal">
+          <div class="tl-year">2025 — Now</div>
+          <div class="tl-content">
+            <p class="tl-role">Co-Founder · Business Operations &amp; Finance</p>
+            <p class="tl-company">Gold Star Catering · Toronto, ON</p>
             <ul class="tl-points">
-              <li>Built Python & SQL data pipelines to analyze sales/expense data</li>
+              <li>Built Python &amp; SQL data pipelines to analyze sales and expense data</li>
               <li>Identified pricing optimization opportunities driving <strong>30% month-over-month revenue growth</strong></li>
-              <li>Ensured data quality, accuracy & compliance across all operations</li>
+              <li>Ensured data quality, accuracy &amp; compliance across all operations</li>
             </ul>
           </div>
         </div>
 
-        <div class="timeline-item" data-wave="🌊">
-          <div class="timeline-badge" style="background:linear-gradient(135deg,#48CAE4,#0077B6)">📚</div>
-          <div class="timeline-card">
-            <div class="tl-meta">Nov 2024 – Present</div>
-            <div class="tl-title">Instructor Assistant, Data Analytics</div>
-            <div class="tl-org">Kumon Learning Centre · London, ON</div>
+        <div class="tl-item reveal">
+          <div class="tl-year">2024 — Now</div>
+          <div class="tl-content">
+            <p class="tl-role">Instructor Assistant, Data Analytics</p>
+            <p class="tl-company">Kumon Learning Centre · London, ON</p>
             <ul class="tl-points">
-              <li>Taught & mentored <strong>100+ students weekly</strong> across math and reading</li>
-              <li>Achieved <strong>85% average grade improvement</strong> through evidence-based teaching methods</li>
-              <li>Managed student records, achievement tracking & parent communication</li>
+              <li>Taught &amp; mentored <strong>100+ students weekly</strong> across math and reading</li>
+              <li>Achieved <strong>85% average grade improvement</strong> through evidence-based teaching</li>
+              <li>Managed student records, achievement tracking &amp; parent communication</li>
             </ul>
           </div>
         </div>
@@ -158,15 +138,12 @@
   <!-- ── PROJECTS ── -->
   <section class="projects-section" id="projects">
     <div class="container">
-      <div class="section-eyebrow">Chapter 03</div>
-      <h2 class="section-heading">The Big <em>Waves</em></h2>
-      <p class="section-sub">Every project is a wave I paddled out and rode. 🏄‍♀️</p>
+      <p class="section-eyebrow">Selected Work</p>
+      <h2 class="section-heading">What I've <em>Built</em></h2>
       <div class="projects-grid" id="projectsGrid">
         <div class="loading-state">
-          <div class="wave-loader">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <p>Paddling out…</p>
+          <div class="wave-loader"><span></span><span></span><span></span><span></span><span></span></div>
+          <p>Loading…</p>
         </div>
       </div>
     </div>
@@ -175,40 +152,35 @@
   <!-- ── SKILLS ── -->
   <section class="skills-section" id="skills">
     <div class="container">
-      <div class="section-eyebrow">Chapter 04</div>
-      <h2 class="section-heading">The <em>Gear</em></h2>
-      <p class="section-sub">Every surfer needs the right equipment.</p>
+      <p class="section-eyebrow">Capabilities</p>
+      <h2 class="section-heading">The <em>Stack</em></h2>
 
       <div class="skills-grid">
-        <div class="skill-group">
-          <div class="skill-group-icon">🐍</div>
-          <div class="skill-group-name">Languages</div>
+        <div class="skill-group reveal">
+          <p class="skill-cat">Languages</p>
           <div class="skill-tags">
             <span>Python</span><span>Java</span><span>C</span>
             <span>SQL</span><span>R</span><span>HTML/CSS</span><span>Shell</span>
           </div>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-icon">🤖</div>
-          <div class="skill-group-name">ML & Data</div>
+        <div class="skill-group reveal">
+          <p class="skill-cat">ML &amp; Data</p>
           <div class="skill-tags">
             <span>PyTorch</span><span>Pandas</span><span>NumPy</span>
             <span>Computer Vision</span><span>OCR</span><span>Data Pipelines</span>
           </div>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-icon">🛠️</div>
-          <div class="skill-group-name">Tools</div>
+        <div class="skill-group reveal">
+          <p class="skill-cat">Tools</p>
           <div class="skill-tags">
             <span>Git</span><span>GitHub</span><span>MongoDB</span>
             <span>Jupyter</span><span>Unix/Linux</span><span>VS Code</span>
           </div>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-icon">📊</div>
-          <div class="skill-group-name">Business</div>
+        <div class="skill-group reveal">
+          <p class="skill-cat">Business</p>
           <div class="skill-tags">
-            <span>Financial Modeling</span><span>Project Mgmt</span>
+            <span>Financial Modeling</span><span>Project Management</span>
             <span>Event Operations</span><span>Excel</span>
           </div>
         </div>
@@ -218,119 +190,47 @@
 
   <!-- ── CONTACT ── -->
   <section class="contact-section" id="contact">
-    <div class="contact-sunset">
-      <div class="container">
-        <div class="section-eyebrow" style="color:rgba(255,255,255,0.7)">Final Chapter</div>
-        <h2 class="section-heading contact-title">Let's Paddle <em>Out</em></h2>
-        <p class="contact-body">Open to internships, collabs & big waves. Let's ride. 🤙</p>
-
-        <div class="contact-cards">
-          <a href="mailto:melina3825@gmail.com" class="contact-card">
-            <span class="cc-icon">📧</span>
-            <div>
-              <div class="cc-label">Email</div>
-              <div class="cc-value">melina3825@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/melina-f-53372b20a" target="_blank" class="contact-card">
-            <span class="cc-icon">💼</span>
-            <div>
-              <div class="cc-label">LinkedIn</div>
-              <div class="cc-value">melina-f-53372b20a</div>
-            </div>
-          </a>
-          <a href="https://github.com/Meellinaa" target="_blank" class="contact-card">
-            <span class="cc-icon">🐙</span>
-            <div>
-              <div class="cc-label">GitHub</div>
-              <div class="cc-value">@Meellinaa</div>
-            </div>
-          </a>
-        </div>
+    <div class="container">
+      <p class="section-eyebrow">Get In Touch</p>
+      <h2 class="contact-heading">Let's build<br><em>something.</em></h2>
+      <p class="contact-sub">Open to internships, collaborations &amp; interesting problems.</p>
+      <div class="contact-links">
+        <a href="mailto:melina3825@gmail.com" class="contact-link">
+          <span class="cl-label">Email</span>
+          <span class="cl-value">melina3825@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/melina-f-53372b20a" target="_blank" class="contact-link">
+          <span class="cl-label">LinkedIn</span>
+          <span class="cl-value">melina-f-53372b20a</span>
+        </a>
+        <a href="https://github.com/Meellinaa" target="_blank" class="contact-link">
+          <span class="cl-label">GitHub</span>
+          <span class="cl-value">@Meellinaa</span>
+        </a>
       </div>
     </div>
   </section>
 
   <footer class="footer">
-    <p>🌊 Crafted by <strong>Melina Fathidashtaki</strong> · 2025 · Surf's Up 🤙</p>
+    <p>Melina Fathidashtaki &nbsp;·&nbsp; 2025</p>
   </footer>
 
   <script src="dragon.js"></script>
   <script src="projects.js"></script>
   <script>
-  // ── Hero typewriter ──
-  const heroWords = ['CS Student', 'ML Engineer', 'Entrepreneur', 'Co-Founder', 'Community Builder', 'Data Analyst'];
-  let hw = 0, hc = 0, hd = false;
-  const hEl = document.getElementById('heroType');
-  function heroType() {
-    const w = heroWords[hw];
-    if (!hd) { hEl.textContent = w.slice(0, ++hc); if (hc === w.length) { hd = true; setTimeout(heroType, 1800); return; } }
-    else { hEl.textContent = w.slice(0, --hc); if (hc === 0) { hd = false; hw = (hw+1) % heroWords.length; } }
-    setTimeout(heroType, hd ? 45 : 85);
+  // Typewriter
+  const words = ['ML Engineer', 'Entrepreneur', 'CS Student', 'Data Analyst', 'Co-Founder', 'Community Builder'];
+  let wi = 0, ci = 0, del = false;
+  const el = document.getElementById('heroType');
+  function type() {
+    const w = words[wi];
+    if (!del) { el.textContent = w.slice(0, ++ci); if (ci === w.length) { del = true; setTimeout(type, 2000); return; } }
+    else { el.textContent = w.slice(0, --ci); if (ci === 0) { del = false; wi = (wi+1) % words.length; } }
+    setTimeout(type, del ? 40 : 80);
   }
-  heroType();
+  type();
 
-  // ── Documentary fun facts ──
-  const facts = [
-    "TD Scholar — 1 of 4 selected university-wide 🏆",
-    "Gifted Academic Program — 1 of 18 from 5,000 applicants 🧠",
-    "Co-founded a company from scratch in first year ⭐",
-    "Built a business that grew 30% revenue month over month 📈",
-    "Organized 250+ events, built a 500+ person community 🎤",
-    "Built an AI that matches your foundation shade 💄",
-    "Codes in Python, Java, C, SQL and more 🐍",
-  ];
-  let fi = 0, fc = 0, fd = false, ftimer;
-  const ftEl = document.getElementById('factText');
-  const fiEl = document.getElementById('factIndex');
-  const ftotalEl = document.getElementById('factTotal');
-  const dotsEl = document.getElementById('factDots');
-
-  ftotalEl.textContent = facts.length;
-
-  // Build dots
-  facts.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'fact-dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => jumpFact(i));
-    dotsEl.appendChild(d);
-  });
-
-  function updateDots() {
-    document.querySelectorAll('.fact-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === fi);
-    });
-    fiEl.textContent = fi + 1;
-  }
-
-  function jumpFact(i) {
-    clearTimeout(ftimer);
-    fi = i; fc = 0; fd = false;
-    ftEl.textContent = '';
-    updateDots();
-    typeFact();
-  }
-
-  function typeFact() {
-    const f = facts[fi];
-    if (!fd) {
-      ftEl.textContent = f.slice(0, ++fc);
-      if (fc === f.length) {
-        fd = true;
-        ftimer = setTimeout(() => {
-          fd = false; fc = 0;
-          fi = (fi + 1) % facts.length;
-          updateDots();
-          ftimer = setTimeout(typeFact, 300);
-        }, 2800);
-        return;
-      }
-    }
-    ftimer = setTimeout(typeFact, 42);
-  }
-  typeFact();
-
-  // ── Nav hide/show ──
+  // Nav hide/show
   let lastY = 0;
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('nav');
@@ -340,6 +240,12 @@
     else if (y < lastY - 5) nav.classList.remove('nav-hidden');
     lastY = y;
   });
+
+  // Reveal on scroll
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   </script>
 </body>
 </html>
