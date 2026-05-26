@@ -1,7 +1,8 @@
 /**
  * Bright Pastel Dragon Scales
- * Full-page animated hex tiles in pink, purple, blue, mint, yellow, peach.
- * Scales are opaque and clearly visible — bright pastel on white.
+ * - Full-page animated hex tiles (pink → purple → blue → mint → yellow → peach)
+ * - Click anywhere → "rock in water" ripple wave spreads across hex grid
+ * - Click opens GitHub profile in new tab
  */
 
 const canvas = document.getElementById('dragonCanvas');
@@ -27,6 +28,13 @@ const MAX_PUSH = 40;
 const SPRING   = 0.10;
 const DAMP     = 0.82;
 
+// Rock-drop ripple waves
+const waves = [];
+const WAVE_SPEED  = 520;   // px per second
+const WAVE_WIDTH  = 55;    // thickness of the wave band
+const WAVE_FORCE  = 70;    // max outward push per hex
+const MAX_WAVE_R  = 1600;  // wave dies after this radius
+
 let hexes = [], W = 0, H = 0;
 let mouseX = -9999, mouseY = -9999;
 let t = 0;
@@ -34,16 +42,14 @@ let t = 0;
 function lerp(a, b, f) { return a + (b - a) * f; }
 
 function getColor(nx, ny, time) {
-  // Wave of color sweeping across grid
-  const wave  = (Math.sin(nx * 5 - time * 0.7 + ny * 2) + 1) / 2;
-  const idx   = (nx + ny * 0.6 + time * 0.05) % 1;
-  const i0    = Math.floor(idx * COLORS.length) % COLORS.length;
-  const i1    = (i0 + 1) % COLORS.length;
-  const blend = (idx * COLORS.length) % 1;
+  const idx  = ((nx + ny * 0.6 + time * 0.05) % 1 + 1) % 1;
+  const i0   = Math.floor(idx * COLORS.length) % COLORS.length;
+  const i1   = (i0 + 1) % COLORS.length;
+  const bl   = (idx * COLORS.length) % 1;
   return [
-    lerp(COLORS[i0][0], COLORS[i1][0], blend),
-    lerp(COLORS[i0][1], COLORS[i1][1], blend),
-    lerp(COLORS[i0][2], COLORS[i1][2], blend),
+    lerp(COLORS[i0][0], COLORS[i1][0], bl),
+    lerp(COLORS[i0][1], COLORS[i1][1], bl),
+    lerp(COLORS[i0][2], COLORS[i1][2], bl),
   ];
 }
 
@@ -97,71 +103,107 @@ function resize() {
   buildGrid();
 }
 
+// ── Splash effect at click centre ──────────────────────────────
+function drawSplash(wx, wy, r, age) {
+  // Expanding white ring
+  const alpha = Math.max(0, 1 - age * 1.8);
+  ctx.save();
+  ctx.globalAlpha = alpha * 0.7;
+  ctx.beginPath();
+  ctx.arc(wx, wy, r * 0.18, 0, Math.PI * 2);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  // Thin bright ring
+  ctx.beginPath();
+  ctx.arc(wx, wy, r * 0.35, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.restore();
+}
+
 function animate(now) {
   requestAnimationFrame(animate);
+  const dt = Math.min((now - (animate.last || now)) / 1000, 0.05);
+  animate.last = now;
   t = now * 0.001;
 
-  // White background so scales read clearly
+  // Advance waves
+  for (const w of waves) w.r += WAVE_SPEED * dt;
+  // Remove expired
+  for (let i = waves.length - 1; i >= 0; i--) {
+    if (waves[i].r > MAX_WAVE_R) waves.splice(i, 1);
+  }
+
+  // White base
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, W, H);
 
   // Occasional sparkle
-  if (Math.random() < 0.005) {
+  if (Math.random() < 0.005)
     hexes[Math.floor(Math.random() * hexes.length)].sparkle = 1;
-  }
 
   for (const h of hexes) {
     const nx = h.bx / W;
     const ny = h.by / H;
 
-    // Gentle bob
+    // Bob
     const bobY = Math.sin(t * 0.9 + h.phase) * 4.5;
     const bobX = Math.cos(t * 0.6 + h.phase) * 1.5;
 
     // Mouse repulsion
-    const dx = h.bx - mouseX, dy = h.by - mouseY;
-    const d  = Math.hypot(dx, dy);
+    const mxd = h.bx - mouseX, myd = h.by - mouseY;
+    const md  = Math.hypot(mxd, myd);
     let px = 0, py = 0, prox = 0;
-    if (d < PUSH_R && d > 0) {
-      prox = 1 - d / PUSH_R;
+    if (md < PUSH_R && md > 0) {
+      prox = 1 - md / PUSH_R;
       const f = prox * prox;
-      px = (dx / d) * f * MAX_PUSH;
-      py = (dy / d) * f * MAX_PUSH;
+      px = (mxd / md) * f * MAX_PUSH;
+      py = (myd / md) * f * MAX_PUSH;
     }
 
-    // Spring
+    // ── Rock-drop wave forces ──
+    for (const w of waves) {
+      const wdx = h.bx - w.x, wdy = h.by - w.y;
+      const wd  = Math.hypot(wdx, wdy);
+      const dist = wd - w.r;            // signed distance from wave front
+      if (dist > -WAVE_WIDTH && dist < WAVE_WIDTH * 0.4) {
+        // bell-shaped impulse centred on the wave front
+        const norm  = dist / WAVE_WIDTH;       // -1..~0.4
+        const bell  = Math.exp(-norm * norm * 6);
+        const age   = w.r / MAX_WAVE_R;
+        const fade  = Math.max(0, 1 - age * 1.2);
+        const force = bell * WAVE_FORCE * fade;
+        // push outward from wave origin
+        if (wd > 0) {
+          px += (wdx / wd) * force;
+          py += (wdy / wd) * force;
+          // quick sparkle as the wave hits
+          if (bell > 0.5 && h.sparkle < 0.3) h.sparkle = 0.55 * fade;
+        }
+      }
+    }
+
+    // Spring physics
     h.vx = (h.vx + (h.bx + bobX + px - h.x) * SPRING) * DAMP;
     h.vy = (h.vy + (h.by + bobY + py - h.y) * SPRING) * DAMP;
     h.x += h.vx;
     h.y += h.vy;
-
     h.sparkle *= 0.87;
 
     // Color
     let [r, g, b] = getColor(nx, ny, t);
-    // Sparkle brightens
-    r = Math.min(255, r + h.sparkle * 120);
-    g = Math.min(255, g + h.sparkle * 120);
-    b = Math.min(255, b + h.sparkle * 120);
-    // Mouse hover brightens slightly
-    r = Math.min(255, r + prox * 30);
-    g = Math.min(255, g + prox * 30);
-    b = Math.min(255, b + prox * 30);
-
+    r = Math.min(255, r + h.sparkle * 120 + prox * 30);
+    g = Math.min(255, g + h.sparkle * 120 + prox * 30);
+    b = Math.min(255, b + h.sparkle * 120 + prox * 30);
     const ri = r|0, gi = g|0, bi = b|0;
+
     const pts = hexPts(h.x, h.y, SIZE - 1);
-
-    // Fill — fully opaque so scales are clearly visible
     fillHex(pts, `rgb(${ri},${gi},${bi})`);
-
-    // Lighter inner glow highlight
-    const shine = hexPts(h.x, h.y, (SIZE - 1) * 0.55);
-    fillHex(shine, `rgba(255,255,255,0.22)`);
-
-    // Crisp white gap between scales
+    fillHex(hexPts(h.x, h.y, (SIZE-1)*0.55), 'rgba(255,255,255,0.22)');
     strokeHex(pts, 'rgba(255,255,255,0.85)', 2);
 
-    // Mouse ring pulse
+    // Mouse ring
     if (prox > 0.3) {
       const ring = hexPts(h.x, h.y, SIZE + 5);
       ctx.beginPath();
@@ -193,7 +235,32 @@ function animate(now) {
       ctx.restore();
     }
   }
+
+  // Draw splash rings on top
+  for (const w of waves) {
+    const age = w.r / MAX_WAVE_R;
+    drawSplash(w.x, w.y, w.r, age);
+  }
 }
+
+// ── Click: drop rock + open GitHub ──────────────────────────────
+canvas.addEventListener('click', e => {
+  // Only trigger if click was directly on the canvas (not on a UI element)
+  if (e.target !== canvas) return;
+
+  // Rock-drop wave
+  waves.push({ x: e.clientX, y: e.clientY, r: 0 });
+
+  // Trigger sparkles at the drop point
+  const near = hexes.filter(h => Math.hypot(h.bx - e.clientX, h.by - e.clientY) < 60);
+  near.forEach(h => { h.sparkle = 1; });
+
+  // Open GitHub in new tab
+  window.open('https://github.com/Meellinaa', '_blank');
+});
+
+// Cursor shows the canvas is clickable
+canvas.style.cursor = 'pointer';
 
 window.addEventListener('mousemove', e => {
   mouseX = e.clientX; mouseY = e.clientY;
@@ -203,7 +270,9 @@ window.addEventListener('mousemove', e => {
   }
 });
 window.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; });
-window.addEventListener('scroll',    () => { canvas.style.transform = `translateY(${window.scrollY * 0.04}px)`; });
+window.addEventListener('scroll', () => {
+  canvas.style.transform = `translateY(${window.scrollY * 0.04}px)`;
+});
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
