@@ -171,8 +171,8 @@ nav, section, footer { position:relative; z-index:10; }
 .wj-desc strong { color:var(--ink); font-weight:600; }
 
 /* Wave SVG connector */
-.wj-wave { width:100%; height:80px; margin:-10px 0; }
-.wj-wave svg { width:100%; height:100%; }
+.wj-wave { width:100%; height:260px; margin:-35px 0; pointer-events:none; }
+.wj-wave svg { width:100%; height:100%; display:block; overflow:visible; }
 
 /* ── EXPERIENCE ── */
 .experience-section { padding:9rem 0; background:rgba(255,255,255,.92); backdrop-filter:blur(20px); }
