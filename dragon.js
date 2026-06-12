@@ -244,9 +244,16 @@ function animate(now) {
 }
 
 // ── Click: drop rock + open GitHub ──────────────────────────────
-canvas.addEventListener('click', e => {
-  // Only trigger if click was directly on the canvas (not on a UI element)
-  if (e.target !== canvas) return;
+// Listen on window (canvas has pointer-events:none so it sits behind UI)
+// Only trigger on background clicks — not on links, buttons, or nav elements
+const INTERACTIVE = new Set(['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'LABEL']);
+window.addEventListener('click', e => {
+  // Walk up the DOM to check if any ancestor is interactive
+  let node = e.target;
+  while (node && node !== document.body) {
+    if (INTERACTIVE.has(node.tagName)) return;
+    node = node.parentElement;
+  }
 
   // Rock-drop wave
   waves.push({ x: e.clientX, y: e.clientY, r: 0 });
@@ -259,8 +266,8 @@ canvas.addEventListener('click', e => {
   window.open('https://github.com/Meellinaa', '_blank');
 });
 
-// Cursor shows the canvas is clickable
-canvas.style.cursor = 'pointer';
+// Pointer cursor on the body background so it feels clickable
+document.body.style.cursor = 'pointer';
 
 window.addEventListener('mousemove', e => {
   mouseX = e.clientX; mouseY = e.clientY;
