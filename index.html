@@ -18,6 +18,7 @@
 <body>
 
   <canvas id="dragonCanvas"></canvas>
+  <div id="scrollBar" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#FF9AC4,#C8A0FF,#7EC8FF);z-index:200;transition:width .1s linear;pointer-events:none;"></div>
 
   <!-- ── NAV ── -->
   <nav class="nav" id="nav">
@@ -436,6 +437,13 @@
       heroName.style.transform = `scale(${1 + progress * 0.18})`;
       heroName.style.opacity   = `${1 - progress * 0.6}`;
     }
+  }, { passive: true });
+
+  // ── Scroll progress bar ──
+  const scrollBar = document.getElementById('scrollBar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    scrollBar.style.width = Math.min(pct, 100) + '%';
   }, { passive: true });
 
   // ── Zoom-enter on scroll ──
