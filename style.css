@@ -420,7 +420,10 @@ section { padding: 8rem 3.5rem; }
   .nav-links { display: none; }
 }
 @media (max-width: 600px) {
-  .hero-name { font-size: clamp(3rem, 17vw, 5rem); }
+  .hero { min-height: auto; padding-top: 8.5rem; }
+  .hero-name { font-size: 13vw; letter-spacing: -.03em; }
+  .hero-tag { font-size: .62rem; letter-spacing: .16em; }
+  .hero-chips span { font-size: .78rem; }
   .contact-big { font-size: clamp(2.2rem, 13vw, 4rem); }
 }
 @media (hover: none) {
