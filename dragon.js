@@ -21,7 +21,7 @@ window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 })();
 
 document.addEventListener('mouseover', e => {
-  if (e.target.closest('a, button, .proj-row, .about-card, .cl')) {
+  if (e.target.closest('a, button, .proj-card, .about-card, .cl')) {
     ring?.classList.add('big');
   } else {
     ring?.classList.remove('big');
@@ -85,7 +85,7 @@ document.querySelectorAll('.about-cards').forEach(el => countObs.observe(el));
 
 // ── Observe project rows after projects.js loads them ──
 window.addEventListener('projectsLoaded', () => {
-  document.querySelectorAll('.proj-row').forEach((el, i) => {
+  document.querySelectorAll('.proj-card').forEach((el, i) => {
     el.style.transitionDelay = (i * 0.05) + 's';
     el.setAttribute('data-a', '');
     obs.observe(el);
